@@ -13,9 +13,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Start Docker Compose
+    - name: Push Docker Compose
       run: |
         scp -o "StrictHostKeyChecking no” docker-compose.yml 'whywelive-nketemplate-ylv2qcj9xjz#p_BllvpLpa2OewRlL8sL0QQfP2gzTbqP@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io':/workspace/nke-template
+
+    - name: Start Docker Compose
+      run: |
         ssh -o "StrictHostKeyChecking no 'whywelive-nketemplate-ylv2qcj9xjz#p_BllvpLpa2OewRlL8sL0QQfP2gzTbqP@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io' “cd /workspace/nke-template && docker compose pull && docker-compose up -d”
        
     - name: Send Telegram Notification on Success
