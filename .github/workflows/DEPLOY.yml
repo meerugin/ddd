@@ -27,7 +27,7 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "Сборка docker-compose прошла успешно!"
+        message: "Сборка DEPLOY прошла успешно!"
 
     - name: Send Telegram Notification on Failure
       if: ${{ failure() == true }}
@@ -35,4 +35,4 @@ jobs:
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-        message: "Сборка docker-compose не удалась!"
+        message: "Сборка DEPLOY не удалась!"
