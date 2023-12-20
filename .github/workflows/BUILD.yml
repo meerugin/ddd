@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  BUILD:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,13 +23,13 @@ jobs:
 
     - name: Build and Push Python Image
       run: |
-        docker build -t ghcr.io/meerugin/ddd/main:1.0 ./python
+        docker build -t ghcr.io/meerugin/ddd/main:1.0
         docker push ghcr.io/meerugin/ddd/main:1.0
       continue-on-error: true
 
     - name: Build and Push Node.js Image
       run: |
-        docker build -t ghcr.io/meerugin/ddd/index:1.0 ./nodejs
+        docker build -t ghcr.io/meerugin/ddd/index:1.0
         docker push ghcr.io/meerugin/ddd/index:1.0
       continue-on-error: true
 
