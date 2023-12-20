@@ -2,11 +2,11 @@ version: '3.9'
 
 services:
   node:
-    image: ghcr.io/meerugin/node:1.2
+    image: ghcr.io/meerugin/ddd/index:1.1
     restart: unless-stopped
-    container_name: node-app
+    container_name: ddd/index
 
   python:
-    image: ghcr.io/meerugin/python:1.2
+    image: ghcr.io/meerugin/ddd/main:1.1
     restart: unless-stopped
-    container_name: python-app
+    container_name: ddd/main
