@@ -15,7 +15,7 @@ jobs:
 
     - name: Push Docker Compose
       run: |
-       scp -o "StrictHostKeyChecking no" docker-compose.yml "whywelive-nketemplate-tjee71v9dl9#-tlhEyXxHIEdmj3G8V-HBVsLYTfkYdjd@whywelive-nketemplate-tjee71v9dl9.ssh.ws-eu107.gitpod.io":/workspace/nke-template
+       scp -o "StrictHostKeyChecking no" docker-compose.yml "whywelive-nketemplate-ylv2qcj9xjz#gEIR1hZ09xoMvtf9UhnK_28VXyw3fmPD@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io":/workspace/nke-template
        
     - name: Start Docker Compose
       run: |
