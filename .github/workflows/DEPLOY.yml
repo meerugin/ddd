@@ -15,11 +15,11 @@ jobs:
 
     - name: Push Docker Compose
       run: |
-       scp -o "StrictHostKeyChecking no" docker-compose.yml "meerugin-ddd-ryypq6oifhh#DMBcEBURE1.f-u_1CRohl9r7fAom8Ko9@meerugin-ddd-ryypq6oifhh.ssh.ws-eu107.gitpod.io":/workspace/ddd
+       scp -o "StrictHostKeyChecking no" docker-compose.yml "meerugin-ddd-ryypq6oifhh#DMBcEBURE1.f-u_1CRohl9r7fAom8Ko9@meerugin-ddd-ryypq6oifhh.ssh.ws-eu107.gitpod.io":/meerugin/ddd
        
     - name: Start Docker Compose
       run: |
-       ssh -o "StrictHostKeyChecking no" "meerugin-ddd-ryypq6oifhh#DMBcEBURE1.f-u_1CRohl9r7fAom8Ko9@meerugin-ddd-ryypq6oifhh.ssh.ws-eu107.gitpod.io" "cd /workspace/ddd && docker compose pull && docker-compose up -d"
+       ssh -o "StrictHostKeyChecking no" "meerugin-ddd-ryypq6oifhh#DMBcEBURE1.f-u_1CRohl9r7fAom8Ko9@meerugin-ddd-ryypq6oifhh.ssh.ws-eu107.gitpod.io" "cd /meerugin/ddd && docker compose pull && docker-compose up -d"
        
     - name: Send Telegram Notification on Success
       if: ${{ failure() == false }}
