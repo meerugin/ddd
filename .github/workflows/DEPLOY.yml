@@ -19,7 +19,7 @@ jobs:
        
     - name: Start Docker Compose
       run: |
-       ssh -o "StrictHostKeyChecking no" "whywelive-nketemplate-tjee71v9dl9#-tlhEyXxHIEdmj3G8V-HBVsLYTfkYdjd@whywelive-nketemplate-tjee71v9dl9.ssh.ws-eu107.gitpod.io" "cd /workspace/nke-template && docker compose pull && docker-compose up -d"
+       ssh -o "StrictHostKeyChecking no" "whywelive-nketemplate-ylv2qcj9xjz#gEIR1hZ09xoMvtf9UhnK_28VXyw3fmPD@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io" "cd /workspace/nke-template && docker compose pull && docker-compose up -d"
        
     - name: Send Telegram Notification on Success
       if: ${{ failure() == false }}
