@@ -1,0 +1,50 @@
+
+name: BUILD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to ghcr.io
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GHCR_TOKEN }}
+
+    - name: Build and Push Python Image
+      run: |
+        docker build -t ghcr.io/meerugin/ddd/main:1.0 ./python
+        docker push ghcr.io/meerugin/ddd/main:1.0
+      continue-on-error: true
+
+    - name: Build and Push Node.js Image
+      run: |
+        docker build -t ghcr.io/meerugin/ddd/index:1.0 ./nodejs
+        docker push ghcr.io/meerugin/ddd/index:1.0
+      continue-on-error: true
+
+    - name: Send Telegram Notification on Success
+      if: ${{ failure() == false }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: "Сборка прошла успешно!"
+
+    - name: Send Telegram Notification on Failure
+      if: ${{ failure() == true }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: "Сборка не удалась!"
