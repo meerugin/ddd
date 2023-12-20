@@ -25,13 +25,13 @@ jobs:
       run: |
         docker build -t ghcr.io/meerugin/ddd/main:1.0
         docker push ghcr.io/meerugin/ddd/main:1.0
-      continue-on-error: true
+      continue-on-error: false
 
     - name: Build and Push Node.js Image
       run: |
         docker build -t ghcr.io/meerugin/ddd/index:1.0
         docker push ghcr.io/meerugin/ddd/index:1.0
-      continue-on-error: true
+      continue-on-error: false
 
     - name: Send Telegram Notification on Success
       if: ${{ failure() == false }}
