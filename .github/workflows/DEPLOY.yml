@@ -1,0 +1,42 @@
+name: DEPLOY
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  DEPLOY:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to ghcr.io
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GHCR_TOKEN }}
+
+    - name: Start Docker Compose
+      run: |
+        ssh -o "StrictHostKeyChecking no 'whywelive-nketemplate-ylv2qcj9xjz#p_BllvpLpa2OewRlL8sL0QQfP2gzTbqP@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io' “cd /workspace/nke-template && docker compose pull && docker-compose up -d”
+        scp -o "StrictHostKeyChecking no” docker-compose.yml 'whywelive-nketemplate-ylv2qcj9xjz#p_BllvpLpa2OewRlL8sL0QQfP2gzTbqP@whywelive-nketemplate-ylv2qcj9xjz.ssh.ws-eu107.gitpod.io':/workspace/nke-template
+
+    - name: Send Telegram Notification on Success
+      if: ${{ failure() == false }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: "Сборка docker-compose прошла успешно!"
+
+    - name: Send Telegram Notification on Failure
+      if: ${{ failure() == true }}
+      uses: appleboy/telegram-action@master
+      with:
+        to: ${{ secrets.TELEGRAM_TO }}
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        message: "Сборка docker-compose не удалась!"
